@@ -26,20 +26,19 @@ font pango:monospace 8
 
 # pacman -S qt5ct
 # export QT_QPA_PLATFORMTHEME="qt5ct"
-#exec --no-startup-id qt5ct
 
 exec setxkbmap "us,ru" ",winkeys" "grp:alt_shift_toggle"
 #exec killall plasmashell
 
-exec xrandr --output HDMI1 --auto --above eDP1
+#exec xrandr --output HDMI1 --auto --above eDP1
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec_always --no-startup-id feh  --bg-scale $HOME/.config/i3/space.png
-exec_always --no-startup-id $picom/compton.sh
-exec_always --no-startup-id $polybar/polybar.sh
+exec_always --no-startup-id feh  --bg-scale $wallpaper
+exec_always --no-startup-id                 $picom/picom.sh
+exec_always --no-startup-id                 $polybar/polybar.sh
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec_always --no-startup-id nm-applet 
+exec --no-startup-id nm-applet 
 
 # Use pactl to adjust volume in PulseAudio.
 #set $refresh_i3status killall -SIGUSR1 i3status
@@ -59,12 +58,14 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec krunner
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec krunner
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+bindsym $mod+Print exec spectacle
 
 # Pulse Audio controls
 #increase sound volume
@@ -178,8 +179,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -207,13 +206,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-        #status_command i3status
-        #tray_output primary
-#}
 
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -253,8 +245,10 @@ for_window [title="Рабочий стол по умолчанию — Plasma"] 
 for_window [class="plasmashell"] kill;
 
 assign [class="code-oss"] $ws4
+assign [title="MATLAB R2019b"] $ws5
 for_window [class="MATLAB"] floating enable 
 for_window [title="MATLAB R2019b"] floating disable, border pixel 2
+for_window [class="matplotlib"] floating enable, border pixel 2
 
 gaps inner 10
 gaps outer 10

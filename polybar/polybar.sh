@@ -6,6 +6,10 @@ killall -q polybar
 # Ожидание полного завершения работы процессов
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-# Запуск Polybar со стандартным расположением конфигурационного файла в ~/.config/polybar/config
-polybar -c $polybar/polybar.conf bottom &
-polybar -c $polybar/polybar.conf top &
+
+if type "xrandr" > /dev/null; then
+    for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+        MONITOR=$m polybar -c $polybar/config --reload bottom &
+        MONITOR=$m polybar -c $polybar/config --reload top &
+    done;
+fi;
