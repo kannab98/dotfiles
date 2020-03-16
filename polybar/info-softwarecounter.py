@@ -28,6 +28,7 @@ processes = OrderedDict({
     'vims': '',
     'ssh': '#',
     'updater': '#',
+    'git': ''
 })
 
 # combine counts of program/process names in the tuple

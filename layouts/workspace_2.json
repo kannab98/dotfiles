@@ -1,0 +1,47 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "none",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 987,
+       "width": 940,
+       "x": 0,
+       "y": 0
+    },
+    "name": "i3 (Русский) - ArchWiki - Mozilla Firefox",
+    "percent": 0.5,
+    "swallows": [
+       {
+       // "class": "^firefox$",
+       // "instance": "^Navigator$",
+       // "title": "^i3\\ \\(Русский\\)\\ \\-\\ ArchWiki\\ \\-\\ Mozilla\\ Firefox$",
+       // "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "none",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1013,
+       "width": 615,
+       "x": 0,
+       "y": 0
+    },
+    "name": "i3 : bash — Konsole",
+    "percent": 0.5,
+    "swallows": [
+       {
+       // "class": "^konsole$",
+       // "instance": "^konsole$",
+       // "title": "^i3\\ \\:\\ bash\\ \\—\\ Konsole$",
+       // "window_role": "^MainWindow\\#1$"
+       }
+    ],
+    "type": "con"
+}
+

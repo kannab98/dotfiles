@@ -26,11 +26,10 @@ font pango:monospace 8
 
 # pacman -S qt5ct
 # export QT_QPA_PLATFORMTHEME="qt5ct"
+exec setxkbmap -model pc101 -layout us,ru -option grp:alt_shift_toggle
 
-exec setxkbmap "us,ru" ",winkeys" "grp:alt_shift_toggle"
-#exec killall plasmashell
 
-#exec xrandr --output HDMI1 --auto --above eDP1
+exec xrandr --output HDMI1 --auto --above eDP1
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec_always --no-startup-id feh  --bg-scale $wallpaper
 exec_always --no-startup-id                 $picom/picom.sh
@@ -73,9 +72,10 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 #decrease sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% 
 # mute sound
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle 
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   0 toggle 
 # mute mic
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute  toggle 
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute  toggle 
+bindsym $mod+p               exec --no-startup-id XF86Display.sh
 
 # Sreen brightness controls
 # increase screen brightness
@@ -208,20 +208,21 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec       --no-startup-id $i3/i3-exit lock, mode "default"
     bindsym e exec       --no-startup-id $i3/i3-exit logout, mode "default"
     bindsym s exec       --no-startup-id $i3/i3-exit suspend, mode "default"
     bindsym h exec       --no-startup-id $i3/i3-exit hibernate, mode "default"
     bindsym r exec       --no-startup-id $i3/i3-exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id $i3/i3-exit shutdown, mode "default"
+    bindsym shift+s exec --no-startup-id $i3/i3-exit shutdown, mode "default"
 
-    # back to normal: Enter or Escape
+    # back to normal: enter or escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+p mode "$mode_system"
+
+bindsym $mod+o mode "$mode_system"
 
 # Plasma compatibility improvements
 for_window [window_role="pop-up"] floating enable
