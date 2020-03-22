@@ -26,8 +26,8 @@ guis = OrderedDict({
 
 processes = OrderedDict({
     'vims': '',
-    'ssh': '#',
-    'updater': '#',
+    'ssh': 'ssh',
+    'updater': '',
     'git': ''
 })
 

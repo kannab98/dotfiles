@@ -8,8 +8,6 @@ shadow-radius = 12;
 shadow-offset-x = -17;
 shadow-offset-y = -7;
 shadow-opacity = 0.5;
-#shadow-exclude = [ "window_type = 'dock'", "window_type = 'desktop'" ];
-
 
 ## fading
 fading = true;
@@ -34,7 +32,8 @@ refresh-rate = 0;
 vsync = "none";
 dbe = false;
 paint-on-overlay = true;
-focus-exclude = [ "class_g = 'Cairo-clock'" , "class_g = 'CoverGloobus'",
+focus-exclude = [ "class_g = 'Cairo-clock'" ,
+	"class_g = 'CoverGloobus'",
 	"class_g = 'Tilda'",
 	"class_g = 'Firefox'",
 	"class_g = 'Firefox-esr'"
@@ -56,4 +55,4 @@ blur-background-fixed = false;
 blur-kern = "3x3box";
 blur-method = "kawase";
 blur-strength = 10;
-#blur-background-exclude = [ "window_type = 'dock'", "window_type = 'desktop'" ];
+blur-background-exclude = [ "window_type = 'dock'", "window_type = 'desktop'" ];

@@ -1,4 +1,59 @@
 
+[bar/only-top]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 27
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+
+line-color = ${bar/top.background}
+line-size = 2
+
+spacing = 3
+padding-right = 4
+module-margin-left = 0
+module-margin-right = 6
+
+font-0 = NotoSans-Regular:size=10;0
+; gpg --keyserver hkp://pgp.mit.edu --recv-keys 1A09227B1F435A33
+; pacaur -S ttf-unifont 
+font-1 = unifont:size=6;-3
+font-2 = Font Awesome 5 Free:pixelsize=8;-2
+font-3 = NotoSans-Regular:size=8;-1
+; pacaur -s ttf-material-icons-git
+font-4 = MaterialIcons:size=10;-1
+font-5 = Termsynu:size=10:antialias=false;0
+
+modules-left = i3 
+modules-right = filesystem cpu-temperature cpu memory
+
+override-redirect = true
+wm-restack = i3
+
+tray-position = right
+tray-detached = false
+tray-scale = 1.0
+tray-padding = 2
+tray-background = ${self.background}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-reparent = true
+
+
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+padding-left = 2
+;padding-right = 2
+;module-margin-left = 2
+;module-margin-right = 2
+
+overline-size = 10
+overline-color = ${self.background}
+underline-size = 2
+underline-color = ${self.background}
 [bar/top]
 monitor = ${env:MONITOR:}
 width = 100%
@@ -20,7 +75,7 @@ font-2 = Termsynu:size=10:antialias=false;-2
 font-3 = Font Awesome 5 Free Solid:pixelsize=10;-2
 font-4 = Font Awesome 5 Brands:pixelsize=16;-2
 
-modules-right = filesystem pulseaudio backlight wireless-network wired-network battery date
+modules-right =  pulseaudio backlight wireless-network wired-network battery date
 
 modules-left = powermenu xkeyboard info-softwarecounter 
 [bar/bottom]
@@ -51,7 +106,7 @@ font-4 = MaterialIcons:size=10;-1
 font-5 = Termsynu:size=10:antialias=false;0
 
 modules-left = i3 
-modules-right = cpu-temperature cpu memory
+modules-right = filesystem cpu-temperature cpu memory
 
 override-redirect = true
 wm-restack = i3
@@ -135,6 +190,7 @@ animation-charging-framerate = 750
 [module/info-softwarecounter]
 type = custom/script
 exec = $polybar/info-softwarecounter.py
+bar-capacity-empty-font = 3
 interval = 1
 
 [module/filesystem]
@@ -147,11 +203,12 @@ label-mounted =  %mountpoint%: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = #66
 
+
+
 [module/cpu-temperature]
 type = custom/script
 exec = $polybar/cpu-temperature.sh
-interval = 0.5
-
+interval = 0.2
 
 [module/cpu]
 type = internal/cpu

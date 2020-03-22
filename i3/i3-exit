@@ -1,0 +1,52 @@
+#!/bin/sh
+lock() {
+
+    #if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+        #dbus-send --session --dest=org.freedesktop.ScreenSaver \
+                  #--type=method_call --print-reply --reply-timeout=20000 \
+                    #/org/freedesktop/ScreenSaver \
+                    #org.freedesktop.ScreenSaver.SetActive boolean:true
+    #else
+        i3lock -i $wallpaper \
+        --insidecolor=373445ff --ringcolor=ffffffff --line-uses-inside \
+        --keyhlcolor=d23c3dff --bshlcolor=d23c3dff --separatorcolor=00000000 \
+        --insidevercolor=fecf4dff --insidewrongcolor=d23c3dff \
+        --ringvercolor=ffffffff --ringwrongcolor=ffffffff  \
+        --indpos="x+86:y+1003" \
+        --radius=14 --veriftext="" --wrongtext="" --noinputtext=""
+    #fi;
+}
+
+logout_DE() {
+    if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+        qdbus org.kde.ksmserver /KSMServer logout 0 0 0
+    else
+        i3-msg exit
+    fi;
+}
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        logout_DE
+        ;;
+    suspend)
+        lock && systemctl suspend
+        ;;
+    hibernate)
+        lock && systemctl hibernate
+        ;;
+    reboot)
+        systemctl reboot
+        ;;
+    shutdown)
+        systemctl poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 1
+esac
+
+exit 0
