@@ -3,7 +3,7 @@ if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
 fi
 
 export TERMINAL=kitty
-export i3=$HOME/.config/i3
-export picom=$HOME/.config/i3/compton
-export polybar=$HOME/.config/i3/polybar
+export i3=$HOME/.dotfiles/i3
+export compton=$HOME/.dotfiles/compton
+export polybar=$HOME/.dotfiles/polybar
 export wallpaper=$HOME/pictures/wallpapers/neon_resize.png

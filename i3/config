@@ -32,7 +32,7 @@ exec setxkbmap -model pc101 -layout us,ru -option grp:alt_shift_toggle
 #exec xrandr --output HDMI1 --auto --above eDP1
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec_always --no-startup-id feh  --bg-scale $wallpaper
-exec_always --no-startup-id                 $picom/picom.sh
+exec_always --no-startup-id                 $compton/compton.sh
 exec_always --no-startup-id                 $polybar/polybar.sh
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
@@ -67,25 +67,24 @@ bindsym $mod+Print exec spectacle
 
 # Pulse Audio controls
 #increase sound volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% 
-#decrease sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% 
-# mute sound
-bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   0 toggle 
-# mute mic
-bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute  toggle 
-bindsym $mod+p               exec --no-startup-id $i3/XF86Display.sh
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% 
+##decrease sound volume
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% 
+## mute sound
+#bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   0 toggle 
+## mute mic
+#bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute  toggle 
+#bindsym $mod+p               exec --no-startup-id $i3/XF86Display.sh
 
-# Sreen brightness controls
-# increase screen brightness
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 
-# decrease screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 
+# Screen brightness controls
+## increase screen brightness
+bindsym XF86MonBrightnessUp exec $i3/XF86MonBrightness up
+## decrease screen brightness
+bindsym XF86MonBrightnessDown exec $i3/XF86MonBrightness down
 
-# Touchpad controls
-# toggle touchpad
-bindsym XF86TouchpadToggle exec toggletouchpad.sh 
-
+## Touchpad controls
+## toggle touchpad
+#bindsym XF86TouchpadToggle exec toggletouchpad.sh 
 
 # change focus
 bindsym $mod+h focus left

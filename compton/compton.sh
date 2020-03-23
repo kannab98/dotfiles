@@ -6,4 +6,4 @@ killall -q compton
 # Ожидание полного завершения работы процессов
 while pgrep -u $UID -x compton >/dev/null; do sleep 1; done
 
-compton -b  --config $picom/config &
+compton -b   &
