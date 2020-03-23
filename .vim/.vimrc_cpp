@@ -1,0 +1,11 @@
+nnoremap <localleader>b :call  RunCpp() <CR>
+function! RunCpp()
+    exec '!~/code/compile '. expand('%:r')
+    exec '!' . expand('%:p:h') .'/'. expand('%:r') 
+    if filereadable(expand('%:p:h') .'/'. expand('%:r') . '.out')
+        echo  "file .out exists"
+        exec '!python ~/code/out.py '. expand('%:p:h') .'/'. expand('%:r') . '.out'
+    endif
+endfunction
+
+

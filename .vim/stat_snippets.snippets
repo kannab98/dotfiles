@@ -1,0 +1,56 @@
+
+# Статфизика
+
+priority 500
+context "math()"
+snippet ",t,(\d)(\d)" "[t_1,t_2]" riA
+[t_`!p snip.rv = match.group(1)`, t_`!p snip.rv = match.group(2)`]
+endsnippet
+
+priority 500
+context "math()"
+snippet "((?:[A-Z]|\\[A-Z][a-z]{1,})(?:[\_|\^][A-Za-z|\*|\{|\}|0-9]{1,}(?:[\_|\^][A-Za-z|\*|\{|\}|0-9|\,]{1,}|)|))(t|w)\s" "arg (t) or (w)" riA
+`!p snip.rv = match.group(1)`[`!p snip.rv = {'w':'\\omega','t':'\\tau'}[match.group(2)]`]
+endsnippet
+
+priority 500
+context "math()"
+snippet "((?:[a-z]|\\[a-z]{1,})(?:[\_|\^][A-Za-z|\*|\{|\}|0-9]{1,}(?:[\_|\^][A-Za-z|\*|\{|\}|0-9|\,]{1,}|)|))(t|w)\s" "arg (t) or (w)" riA
+`!p snip.rv = match.group(1)`(`!p snip.rv = {'w':'\\omega','t':'t'}[match.group(2)]`)
+endsnippet
+
+priority 1000
+context "math()"
+snippet "\[\\tau\]t" "Fix arg tau -> t" riA
+[t]
+endsnippet
+
+priority 1000
+context "math()"
+snippet "\(\\tau\)t" "Fix arg tau -> t" riA
+(t)
+endsnippet
+
+priority 1000
+context "math()"
+snippet "Sx" "Fix arg tau -> t" riA
+S_{x$1}$0
+endsnippet
+
+priority 1000
+context "math()"
+snippet "Sy" "Fix arg tau -> t" riA
+S_{y$1}$0
+endsnippet
+
+priority 1000
+context "math()"
+snippet "jw" "Fix arg tau -> t" riA
+(j\omega)$0
+endsnippet
+
+priority 1000
+context "math()"
+snippet "([a-zA-Z]{1,})\*" "Fix arg tau -> t" riA
+`!p snip.rv = match.group(1)`^{*}
+endsnippet
