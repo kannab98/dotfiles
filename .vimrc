@@ -33,7 +33,8 @@ filetype plugin on
 
 Plug 'tpope/vim-fugitive'
 Plug 'lyokha/vim-xkbswitch'
-let g:XkbSwitchEnabled = 1 let g:XkbSwitchLib = '/usr/lib/libxkbswitch.so' """ Enable autochange layout in normal mode
+let g:XkbSwitchEnabled = 1 
+let g:XkbSwitchLib = '/usr/lib/libxkbswitch.so' " Enable autochange layout in normal mode
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex' }
 Plug 'lervag/vimtex'                , {'for': 'tex'}
@@ -72,7 +73,7 @@ Plug 'mboughaba/i3config.vim'
 
 aug i3config_ft_detection
   au!
-  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+  au BufNewFile,BufRead */i3/config set filetype=i3config
 aug end
 
 "let g:pymode_lint = 0

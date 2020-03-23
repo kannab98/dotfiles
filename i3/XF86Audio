@@ -1,0 +1,36 @@
+#! /bin/bash
+send() {
+
+    qdbus org.kde.kglobalaccel /component/kmix \
+          org.kde.kglobalaccel.Component.invokeShortcut \
+          $1 "default"
+
+}
+
+
+case "$1" in 
+    mute)
+        if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+            send $1
+        else
+            pactl set-sink-mute 0 toggle
+        fi
+        ;;
+    increase_volume)
+        if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+            send $1
+        else
+            pactl set-sink-volume 0 +5%
+        fi
+        ;;
+    decrease_volume)
+        if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+            send $1
+        else
+            pactl set-sink-volume 0 -5%
+        fi
+        ;;
+esac
+exit 0
+
+
