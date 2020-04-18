@@ -14,6 +14,7 @@ lock() {
         --ringvercolor=ffffffff --ringwrongcolor=ffffffff  \
         --indpos="x+86:y+1003" \
         --radius=14 --veriftext="" --wrongtext="" --noinputtext=""
+        xkb-switch -s us
     #fi;
 }
 
@@ -22,6 +23,7 @@ logout_DE() {
         qdbus org.kde.ksmserver /KSMServer logout 0 0 0
     else
         i3-msg exit
+        startx
     fi;
 }
 
@@ -33,10 +35,10 @@ case "$1" in
         logout_DE
         ;;
     suspend)
-        lock && systemctl suspend
+        systemctl suspend
         ;;
     hibernate)
-        lock && systemctl hibernate
+        systemctl hibernate
         ;;
     reboot)
         systemctl reboot

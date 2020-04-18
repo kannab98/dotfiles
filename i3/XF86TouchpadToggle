@@ -1,0 +1,13 @@
+#!/bin/bash
+if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+    qdbus org.kde.kglobalaccel /component/kcm_touchpad \
+          org.kde.kglobalaccel.Component.invokeShortcut \
+          "Toggle Touchpad" "default"
+
+else
+    if synclient -l | grep "TouchpadOff .*=.*0" ; then
+        synclient TouchpadOff=1 ;
+    else
+        synclient TouchpadOff=0 ;
+    fi
+fi
