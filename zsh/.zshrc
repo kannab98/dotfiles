@@ -3,86 +3,52 @@ autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[red]%}%n%{$fg[red]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
 HISTFILE=~/.zsh_history
-setopt HIST_IGNORE_DUPS
 HISTSIZE=10000
 SAVEHIST=10000
+export EDITOR=vim
 bindkey -v
+
+setopt extendedglob
+setopt hist_ignore_all_dups # remove older duplicate entries from history
+setopt hist_reduce_blanks # remove superfluous blanks from history items
+setopt inc_append_history # save history entries as soon as they are entered
+setopt share_history # share history between different instances of the shell
+setopt auto_cd # cd by typing directory name if it's not a command
+setopt auto_list # automatically list choices on ambiguous completion
+setopt auto_menu # automatically use menu completion
+setopt always_to_end # move cursor to end if word had one match
+setopt prompt_subst
 
 # Basic auto/tab complete:
 autoload -U compinit && compinit
-zstyle ':completion:*' menu select
+
+zstyle ':completion:*' menu select # select completions with arrow keys
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.ompinit
 
-
-# Use vim keys in tab complete menu:
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -v '^?' backward-delete-char
-
+alias vim='vim --servername vim'  
 alias ls='ls --color=auto --group-directories-first'
 alias -s tex=vim
 alias -s bib=vim
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+autoload -U zsh-mime-setup # automatical open files with known extension
+# watch /etc/mailcap
+zsh-mime-setup
+
+[ -f "$HOME/.dotfiles/zsh/bindkeys"  ]         && \
+    source "$HOME/.dotfiles/zsh/bindkeys"
+[ -f "$HOME/.dotfiles/zsh/functions" ]         && \
+    source "$HOME/.dotfiles/zsh/functions"
+[ -f "$HOME/.dotfiles/zsh/kill.complete" ]     && \
+    source "$HOME/.dotfiles/zsh/kill.complete"
+[ -f "$HOME/.dotfiles/zsh/vi-mode" ]           && \
+    source "$HOME/.dotfiles/zsh/vi-mode"
+#[ -f "$HOME/.dotfiles/zsh/theme" ]             && \
+    #source "$HOME/.dotfiles/zsh/theme"      
 
 
-function cd {
-        builtin cd $@
-        echo $(pwd) > ~/.last_dir
-}
-if [ -f ~/.last_dir ]; then
-        cd "`cat ~/.last_dir`"
-fi
-
-extract ()
-{
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
 
 
-up(){
-  local d=""
-  limit=$1
-  for ((i=1 ; i <= limit ; i++))
-    do
-      d=$d/..
-    done
-  d=$(echo $d | sed 's/^\///')
-  if [ -z "$d" ]; then
-    d=..
-  fi
-  cd $d
-}
 
-conservation(){
-    path=/sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode
-    bool=$(cat $path)
-    if [ $bool -eq 1 ] ; then
-        echo 0 > $path
-        echo "conservation mod is off"
-    else
-        echo 1 > $path
-        echo "conservation mod is on"
-    fi
-}
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

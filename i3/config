@@ -22,8 +22,9 @@ exec_always --no-startup-id                 $i3/power-manager
 exec_always --no-startup-id feh  --bg-scale $wallpaper &
 exec_always --no-startup-id                 $compton/compton.sh
 exec_always --no-startup-id                 $polybar/polybar.sh
-exec nm-applet &
-#exec pasystray &
+exec                                        xfce4-clipman &
+exec                                        nm-applet &
+#exec                                        pasystray &
 
 
 #exec        --no-startup-id     ~/.dotfiles/kitty/focus-last.sh
@@ -36,6 +37,9 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec kitty
+# start a file manager
+bindsym $mod+e exec kitty ranger
+
 #bindsym $mod+Return exec ~/.dotfiles/kitty/kitty.sh 
 #bindsym $mod+Shift+Return exec kitty -T='main kitty' --detach --listen-on unix:$i3/kittytmp
 # kill focused window
@@ -104,9 +108,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+bindsym $mod+Shift+s layout stacking
 bindsym $mod+Shift+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -265,12 +269,14 @@ for_window [class="TelegramDesktop"] floating enable,resize set 380 480
 for_window [title="MATLAB R2019b"] floating disable, border pixel 2
 for_window [class="matplotlib"] floating enable, border pixel 2
 
+for_window [class="feh"] floating enable, resize set 800 600
 gaps inner 10
 gaps outer 10
 gaps bottom 0
 gaps top 0
-#smart_gaps on
-#smart_gaps inverse_outer
+smart_gaps on
+smart_gaps inverse_outer
+
 #hide_edge_borders smart_no_gaps
 #gaps outer current plus 5
 #gaps horizontal current plus 40
