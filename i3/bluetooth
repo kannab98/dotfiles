@@ -1,0 +1,11 @@
+#!/bin/bash
+
+killall -q blueman-applet
+
+# Ожидание полного завершения работы процессов
+while pgrep -u $UID -x blueman-applet>/dev/null; do sleep 1; done
+
+
+blueman-applet &
+# vim:filetype=sh
+

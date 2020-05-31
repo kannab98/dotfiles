@@ -1,0 +1,11 @@
+#!/bin/bash
+
+killall -q pa-applet
+
+# Ожидание полного завершения работы процессов
+while pgrep -u $UID -x pa-applet>/dev/null; do sleep 1; done
+
+
+pa-applet &
+# vim:filetype=sh
+

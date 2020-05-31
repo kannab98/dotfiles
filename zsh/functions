@@ -57,4 +57,16 @@ conservation(){
     fi
 }
 
+size-packages(){
+    expac -H M \
+        "%011m\t%-20n\t%10d" \
+        $(comm -23 <(pacman -Qqen | sort) <(pacman -Qqg base-devel | sort)) | sort -n
+}
+#nfile(){
+    #ls -t '*(^/om[1])'    | head -1
+#}
+
+#ndir(){
+        #ls -td */ | head -1
+#}
 # vim:filetype=sh

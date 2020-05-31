@@ -1,60 +1,3 @@
-[bar/only-top]
-monitor = ${env:MONITOR:}
-width = 100%
-height = 27
-
-background = ${bar/top.background}
-foreground = ${bar/top.foreground}
-
-line-color = ${bar/top.background}
-line-size = 2
-
-spacing = 3
-padding-right = 4
-module-margin-left = 0
-module-margin-right = 6
-
-font-0 = NotoSans-Regular:size=10;0
-; gpg --keyserver hkp://pgp.mit.edu --recv-keys 1A09227B1F435A33
-; pacaur -S ttf-unifont 
-font-1 = unifont:size=6;-3
-font-2 = Font Awesome 5 Free:pixelsize=8;-2
-font-3 = NotoSans-Regular:size=8;-1
-; pacaur -s ttf-material-icons-git
-font-4 = Termsynu:size=10:antialias=false;0
-font-5 = Iosevka Nerd Font:style=Regular,Book:size=12;1
-font-6 = Iosevka Nerd Font:style=Regular,Book:size=22;3
-
-
-modules-left = i3 
-modules-right = network-speed filesystem-root filesystem-home cpu-temperature cpu memory
-
-wm-restack = i3
-
-tray-position = left
-tray-detached = false
-tray-scale = 1.5
-tray-padding = 0
-tray-background = ${self.background}
-tray-offset-x = 0
-tray-offset-y = 0
-tray-reparent = true
-tray-transparent= true
-
-
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
-
-padding-left = 2
-;padding-right = 2
-;module-margin-left = 2
-;module-margin-right = 2
-
-overline-size = 10
-overline-color = ${self.background}
-underline-size = 2
-underline-color = ${self.background}
-
 [bar/top]
 monitor = ${env:MONITOR:}
 width = 100%
@@ -72,11 +15,11 @@ module-margin = 4
 
 font-0 = NotoSans-Regular:size=10;-1
 font-1 = MaterialIcons:size=12;1
-font-2 = Termsynu:size=10:antialias=false;2
-font-3 = Iosevka Nerd Font:style=Regular,Book:size=12;1
-font-4 = Iosevka Nerd Font:style=Regular,Book:size=22;3
+font-2 = Iosevka Nerd Font:style=Regular,Book:size=12;1
+font-3 = Iosevka Nerd Font:style=Regular,Book:size=22;3
 
-modules-right =  pulseaudio backlight network-speed wired-network battery date
+;modules-right = pulseaudio backlight network-speed wired-network battery date
+modules-right = pulseaudio backlight battery date
 modules-left = i3
 
 ;override-redirect = true
@@ -112,7 +55,7 @@ font-4 = NotoSans-Regular:size=8;-1
 font-5 = Termsynu:size=10:antialias=false;0
 
 ;modules-left = i3 
-modules-right = filesystem-root filesystem-home cpu-temperature cpu memory
+modules-right =  filesystem-root filesystem-home cpu-temperature cpu memory
 ;override-redirect = true
 
 
@@ -126,6 +69,7 @@ tray-background = ${self.background}
 tray-offset-x = 0
 tray-offset-y = 0
 tray-reparent = true
+pseudo-transparency=false
 ;tray-transparent = true
 
 
@@ -295,21 +239,6 @@ interval = 3.0
 label-connected =    %{T3}%local_ip%%{T-}
 label-disconnected-foreground = #66
 
-[module/volume]
-type = internal/volume
-speaker-mixer = Speaker
-headphone-mixer = Headphone
-headphone-id = 9
-
-format-volume = <ramp-volume> <label-volume>
-label-muted = 婢 muted
-label-muted-foreground = #66
-
-ramp-volume-0 = 奔
-ramp-volume-1 = 奔
-ramp-volume-2 = 奔
-ramp-volume-3 = 奔
-
 [module/powermenu]
 type = custom/menu
 
@@ -361,6 +290,9 @@ label-muted-foreground = #66
 ramp-volume-0 = 奄
 ramp-volume-1 = 奔
 ramp-volume-2 = 墳
+
+click-right = pavucontrol &
+
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
@@ -398,6 +330,7 @@ ws-icon-2 = 3;
 ws-icon-3 = 4;     
 ws-icon-4 = 5; 
 ws-icon-5 = 6; 
+ws-icon-6 = 7;ﭮ
 ws-icon-default =  
 
 label-dimmed-underline = ${root.background}
@@ -410,9 +343,8 @@ format = <label-state> <label-mode>
 ; Available tokens:
 ;   %mode%
 ; Default: %mode%
-label-mode = %mode%
+label-mode =  %mode%
 label-mode-padding = 0
-label-mode-background = #e60053
 
 ; Available tokens:
 ;   %name%
@@ -456,9 +388,5 @@ label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 label-urgent-padding = 4
 
-; Separator in between workspaces
-label-separator = |
-label-separator-padding = 0
-label-separator-foreground = #ffb52a
 
 ; vim:ft=dosini

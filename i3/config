@@ -18,13 +18,17 @@ font pango:monospace 8
 exec setxkbmap -model pc101 -layout us,ru -option grp:alt_shift_toggle
 
 
-exec_always --no-startup-id                 $i3/power-manager 
+
 exec_always --no-startup-id feh  --bg-scale $wallpaper &
 exec_always --no-startup-id                 $compton/compton.sh
-exec_always --no-startup-id                 $polybar/polybar.sh
-exec                                        xfce4-clipman &
-exec                                        nm-applet &
-#exec                                        pasystray &
+#exec_always --no-startup-id                 $polybar/polybar.sh
+exec_always --no-startup-id                 xfce4-panel --disable-wm-check
+exec_always --no-startup-id                 $i3/wifi
+#exec_always --no-startup-id                 $i3/clipboard
+exec_always --no-startup-id                 $i3/power-manager 
+#exec_always --no-startup-id                 $i3/pulseaudio
+#exec_always --no-startup-id                 $i3/bluetooth
+exec        --no-startup-id                 dunst
 
 
 #exec        --no-startup-id     ~/.dotfiles/kitty/focus-last.sh
@@ -35,10 +39,12 @@ exec                                        nm-applet &
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+bindsym $mod+w      exec rofi -show window
 # start a terminal
 bindsym $mod+Return exec kitty
 # start a file manager
-bindsym $mod+e exec kitty ranger
+bindsym $mod+e      exec $i3/filemanager
+bindsym $mod+m      exec $i3/monitor
 
 #bindsym $mod+Return exec ~/.dotfiles/kitty/kitty.sh 
 #bindsym $mod+Shift+Return exec kitty -T='main kitty' --detach --listen-on unix:$i3/kittytmp
@@ -46,11 +52,10 @@ bindsym $mod+e exec kitty ranger
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec --no-startup-id rofi -show combi 
-bindsym $mod+d exec --no-startup-id krunner
+bindsym $mod+d exec  rofi -show drun -show-icons 
 
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym Print exec spectacle
+bindsym Print exec spectacle -b -r -c
 
 # Pulse Audio controls
 #increase sound volume
@@ -60,7 +65,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id $i3/XF86Audio decrease_volume
 ## mute sound
 bindsym XF86AudioMute        exec --no-startup-id $i3/XF86Audio mute
 ## mute mic
-#bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute  toggle 
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute 1 toggle 
+bindsym Shift+XF86AudioMute        exec pavucontrol -t 3 & 
+bindsym Shift+XF86AudioLowerVolume exec pavucontrol -t 4 & 
 
 #bindsym $mod+p               exec --no-startup-id $i3/XF86Display.sh
 
@@ -126,12 +133,12 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: "
-set $ws2 "2: "
-set $ws3 "3: "
-set $ws4 "4: "
-set $ws5 "5: "
-set $ws6 "6: "
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -184,7 +191,8 @@ mode "window" {
         bindsym $mod+w mode "default"
 }
 
-bindsym $mod+w mode "window"
+#bindsym $mod+w mode "window"
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -250,20 +258,28 @@ for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px, no_focus
 for_window [class="Plasma"] floating enable, border none;
 for_window [class="Pavucontrol"] floating enable
-#for_window [class="copyq"] floating enable
-
 for_window [title="Рабочий стол по умолчанию — Plasma"] kill;
 
-assign [class="code-oss"] $ws3
-assign [title="MATLAB R2019b"] $ws3
-assign [class="Thunderbird"] $ws5
-assign [class="Mail"] $ws5
-assign [class="winword.exe"] $ws6
-#assign [class="discord"] $ws4
-assign [class="Steam"] $ws4
+#assign [class="firefox"] $ws1
+#assign [class="code-oss"] $ws3
+#assign [title="MATLAB R2019b"] $ws3
+#assign [class="Steam"] $ws4
+#assign [class="Thunderbird"] $ws5
+#assign [class="Mail"] $ws5
+#assign [class="winword.exe"] $ws6
+#assign [class="discord"] $ws7
+
+
+
+
 
 
 for_window [class="MATLAB"] floating enable 
+for_window [class="xfce4-panel"] floating enable 
+for_window [class="Xfce4-panel"] floating enable 
+for_window [class="nm-connection-editor"] floating enable 
+for_window [class="Nm-connection-editor"] floating enable 
+
 for_window [class="TelegramDesktop"] floating enable,resize set 380 480
 #for_window [class="telegram-desktop"] resize set 380 480
 for_window [title="MATLAB R2019b"] floating disable, border pixel 2
