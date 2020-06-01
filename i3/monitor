@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-kitty gtop
+kitty gtop &
 # vim:filetype=sh

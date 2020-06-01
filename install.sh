@@ -1,6 +1,7 @@
 #!/bin/sh
 
 dotfiles=~/.dotfiles
+cd $dotfiles
 
 check_files() {
 
@@ -22,4 +23,10 @@ link(){
      ln -sf $1 $2 
 }
 
-link 1 2
+#link 1 2
+for j in compton dunst i3 kitty ranger rofi; do
+    for i in $j/*; do
+        echo "Create symlink $dotfiles/$i -> ~/.config/$i" 
+        ln -sf ~/.dotfiles/$i ~/.config/$i
+    done
+done
