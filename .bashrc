@@ -9,6 +9,8 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 shopt -s checkwinsize
 shopt -s histappend
 shopt -s cmdhist
+shopt -s cdspell
+shopt -s checkwinsize
 set -o vi
 set show-mode-in-prompt-on
 
@@ -33,12 +35,15 @@ if ! shopt -oq posix; then
     fi
 fi
 
-export WINEARCH=win32
-export WINEPREFIX=~/.wine
+
+#export WINEARCH=win32
+#export WINEPREFIX=~/.wine
 # Check ip wan address
 alias ip4='dig +short -4 A    myip.opendns.com   @resolver1.opendns.com'
 alias ip6='dig +short -6 AAAA myip.opendns.com   @resolver1.opendns.com'
-alias vim='vim --servername vim'  
+#alias vim0='vim'  
+#alias vim='vim --servername vim'  
+
 
 alias sudo='sudo -E'
 alias status='sudo systemctl status'
@@ -51,6 +56,14 @@ alias restart='sudo systemctl restart'
 alias google='ping google.com'
 alias analyze='systemd-analyze blame'
 alias ls='ls --color=auto --group-directories-first'
+
+function cd {
+        builtin cd $@
+        echo $(pwd) > ~/.last_dir
+}
+if [ -f ~/.last_dir ]; then
+        cd "`cat ~/.last_dir`"
+fi
 
 extract ()
 {
@@ -100,3 +113,4 @@ conservation(){
         echo "conservation mod is on"
     fi
 }
+

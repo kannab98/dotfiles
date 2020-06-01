@@ -83,6 +83,10 @@ else:
 `$2
 endsnippet
 
+snippet root "Root directory" 
+%!TEX root = ${1:./}
+endsnippet
+
 snippet уй "Equation" b 
 \begin{equation}
 	\label{eq:${2}}
@@ -208,6 +212,17 @@ snippet fig "Figure environment" b
 	\caption{$0}
 	\label{fig:${5}}
 \end{figure}
+endsnippet
+
+snippet sfig "Figure environment" b
+\begin{subfigure}{${2:0.49}\linewidth}
+	\centering
+	\includegraphics[width=${3:1}\linewidth]{${4:example-image-a}}
+\end{subfigure}
+endsnippet
+
+snippet рис. "Figure reference" w
+рис. \ref{fig:${1:1}}
 endsnippet
 
 snippet enum "Enumerate" b
