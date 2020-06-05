@@ -6,7 +6,7 @@
 augroup TeXautocmd
   autocmd!
 " Russian and English spellchecking
-  autocmd BufNewFile,BufRead *.tex set spell spelllang=ru,en_us
+  autocmd BufEnter           *.tex set spell spelllang=ru,en_us
   autocmd CursorMovedI       *.tex call ToggleLangMap()
   autocmd CursorHoldI        *.tex call ToggleLangMap()
   autocmd InsertEnter        *.tex call ToggleLangMap()
@@ -100,3 +100,11 @@ function! ToggleLangMap()
 endfunction
 endif
 "end{ToggleLangMap}
+"
+function FigTemplate()
+    execute ":r ~/.dotfiles/templates/tex/fig_preamble.tex"
+endfunction
+
+function ReportTemplate()
+    execute ":r ~/.dotfiles/templates/tex/report_preamble.tex"
+endfunction

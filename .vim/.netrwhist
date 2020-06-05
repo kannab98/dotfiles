@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/kannab/.dotfiles/templates/tex/report'
+let g:netrw_dirhist_3='/home/kannab/.dotfiles/i3'
+let g:netrw_dirhist_2='/usr/share/applications'
 let g:netrw_dirhist_1='/home/kannab/.dotfiles/compton'
 let g:netrw_dirhist_0='/home/kannab/.dotfiles/dunst'
 let g:netrw_dirhist_9='/home/kannab/.dotfiles'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_8='/home/kannab/.config'
 let g:netrw_dirhist_7='/home/kannab/diplom/presentation'
 let g:netrw_dirhist_6='/home/kannab/.config/gtk-3.0'
 let g:netrw_dirhist_5='/home/kannab/.config'
-let g:netrw_dirhist_4='/home/kannab/.config/xfce4'
-let g:netrw_dirhist_3='/home/kannab/.config/xfce4/panel'
-let g:netrw_dirhist_2='/home/kannab/.config/xfce4'
