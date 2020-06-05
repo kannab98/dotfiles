@@ -76,6 +76,7 @@ bindsym XF86MonBrightnessUp   exec --no-startup-id $i3/XF86MonBrightness up
 ## decrease screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id $i3/XF86MonBrightness down
 
+bindsym $mod+n                exec --no-startup-id $i3/new-workspace
 ## Touchpad controls
 ## toggle touchpad
 bindsym XF86TouchpadToggle exec --no-startup-id XF86TouchpadToggle

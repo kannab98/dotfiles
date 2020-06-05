@@ -1,0 +1,20 @@
+\documentclass[tikz,10pt]{standalone}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb,cmap,pgfplots,pgfplotstable}
+
+\usetikzlibrary{arrows,calc,intersections}
+\pgfplotsset{compat=newest}
+
+\def\ylabel{}
+\def\xlabel{}
+\begin{document}
+    \begin{tikzpicture}
+        \pgfplotstableread[col sep=semicolon]{example.csv}\data;
+        \begin{axis}[xlabel=\xlabel, ylabel=\ylabel]
+        \addplot 
+            table
+            [x = T, y = P]{\data};      
+        \end{axis}
+    \end{tikzpicture}
+\end{document}
