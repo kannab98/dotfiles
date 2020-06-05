@@ -29,13 +29,13 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.ompinit
 
 alias vim='vim --servername vim'  
-#alias python='python2'  
 alias ls='ls --color=auto --group-directories-first'
 alias -s tex=vim
 alias -s bib=vim
 
 alias -g nf='*(^/om[1])'
 alias -g nd='*(/om[1])'
+alias gca="git commit -a  --allow-empty-message -m ''"
 
 autoload -U zsh-mime-setup # automatical open files with known extension
 # watch /etc/mailcap
