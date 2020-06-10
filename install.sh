@@ -24,9 +24,10 @@ link(){
 }
 
 #link 1 2
-for j in compton dunst i3 kitty ranger rofi; do
+for j in ranger; do
     for i in $j/*; do
         echo "Create symlink $dotfiles/$i -> ~/.config/$i" 
         ln -sf ~/.dotfiles/$i ~/.config/$i
     done
 done
+

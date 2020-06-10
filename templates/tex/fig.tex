@@ -1,0 +1,48 @@
+\documentclass[crop,tikz]{standalone}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb,cmap,pgfplots,pgfplotstable}
+\usepackage[pass,a4paper]{geometry}
+
+\usetikzlibrary{arrows,calc,intersections}
+\pgfplotsset{compat=newest, width=0.45\paperwidth}
+
+\pgfplotsset{model/.style = {color=red, mark=none, thick}}
+
+\pgfplotsset{
+        experimentaxis/.style = 
+        {
+          legend pos = north west,
+          grid=both,
+          major grid style={line width=.2pt, draw=gray!80},
+          minor grid style={line width=.1pt, draw=gray!20},
+          minor tick num=4,
+        }
+}
+
+\pgfplotsset{
+        modelaxis/.style = 
+        {
+          legend pos = north west,
+          %axis x line = bottom, 
+          %axis y line = left, 
+          %minor tick num=4,
+          %xlabel style={below right},
+          %ylabel style={above left},
+        }
+}
+
+\begin{document}
+    \begin{tikzpicture}
+        \pgfplotstableread[col sep=semicolon]{example.csv}\data;
+        \begin{axis}[
+            xlabel={$x,$ a.u.}, ylabel={$y,$ a.u.},
+            modelaxis, legend pos = north east
+        ]
+        \addplot[model]
+            table
+            [x expr = \thisrow{T} - 1e-2, y = P]{\data};      
+        \addlegendentry{Модель}
+        \end{axis}
+    \end{tikzpicture}
+\end{document}

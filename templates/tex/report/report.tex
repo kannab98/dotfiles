@@ -6,6 +6,14 @@
 \usepackage[russian]{babel}
 \usepackage[mode=buildnew]{standalone}
 
+\usepackage{tikz}
+\usepackage{,pgfplots,pgfplotstable}
+
+\usetikzlibrary{arrows,calc,intersections}
+\pgfplotsset{compat=newest, width=0.45\paperwidth}
+
+\def\ylabel{}
+\def\xlabel{}
 \usepackage
     {
         % Дополнения Американского математического общества (AMS)
@@ -96,6 +104,12 @@
 
 \begin{document}
 
+\begin{figure}[h]
+    \centering
+    %\includegraphics[scale=1]{../fig_preamble.pdf}
+    \caption{}
+    \label{fig:}
+\end{figure}
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

@@ -8,7 +8,7 @@ shadow-radius = 12;
 shadow-offset-x = -17;
 shadow-offset-y = -7;
 shadow-opacity = 0.5;
-#shadow-exclude = [ "window_type = 'dock'", "window_type = 'desktop'" ];
+shadow-exclude = [ "window_type = 'dock'", "window_type = 'desktop'" ];
 
 
 ## fading
@@ -22,9 +22,9 @@ fade-exclude = [
 ## opacity
 active-opacity = 1.0;
 frame-opacity = 0.7;
-opacity-rule = [ "90:class_g = 'code-oss'",
-                 "90:class_g = 'telegram-desktop'",
-                 "90:class_g = 'TelegramDesktop'"];
+#opacity-rule = [ "90:class_g = 'code-oss'",
+                 #"90:class_g = 'telegram-desktop'",
+                 #"90:class_g = 'TelegramDesktop'"];
 ## other
 backend = "glx";
 mark-wmwin-focused = true;

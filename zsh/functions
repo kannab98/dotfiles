@@ -62,6 +62,27 @@ size-packages(){
         "%011m\t%-20n\t%10d" \
         $(comm -23 <(pacman -Qqen | sort) <(pacman -Qqg base-devel | sort)) | sort -n
 }
+remove-unused-packages(){
+    pacman -Rns $(pacman -Qqdt)
+}
+
+rate(){
+    if [ ! -f /tmp/ratePage ]; then
+        freshPage='http://www.cbr.ru/scripts/xml_daily.asp?date_req='\
+                                                     $(date +%d.%m.%Y)
+        curl $freshPage > /tmp/ratePage
+    fi
+    charcode=($(grep -oP '(?<=CharCode>)[^<]+' /tmp/ratePage))
+    value=($(grep -oP '(?<=Value>)[^<]+' /tmp/ratePage))
+    
+    for ((i=0; i <= ${#value[*]}; i++)); do
+        if [ "${charcode[$i]}" = "${1:u}" ]; then
+           echo ${value[$i]}
+        fi
+    done
+}
+
+
 #nfile(){
     #ls -t '*(^/om[1])'    | head -1
 #}

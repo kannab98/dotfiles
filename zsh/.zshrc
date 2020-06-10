@@ -49,7 +49,6 @@ zsh-mime-setup
     source "$HOME/.dotfiles/zsh/kill.complete"
 [ -f "$HOME/.dotfiles/zsh/vi-mode" ]           && \
     source "$HOME/.dotfiles/zsh/vi-mode"
-#[ -f "$HOME/.dotfiles/zsh/theme" ]             && \
 #
 
 
