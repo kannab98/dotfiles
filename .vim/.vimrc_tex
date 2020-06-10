@@ -101,10 +101,6 @@ endfunction
 endif
 "end{ToggleLangMap}
 "
-function FigTemplate()
-    execute ":r ~/.dotfiles/templates/tex/fig_preamble.tex"
-endfunction
-
-function ReportTemplate()
-    execute ":r ~/.dotfiles/templates/tex/report_preamble.tex"
+function! FigTemplate()
+    execute ":r ~/.dotfiles/templates/tex/fig.tex"
 endfunction
