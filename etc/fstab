@@ -1,0 +1,10 @@
+# UUID=4a6a042e-10e7-4ed7-be9a-801b4822fff1 LABEL=root
+/dev/nvme0n1p2      	/         	ext4      	rw,relatime	0 1
+
+# UUID=14FA-EE7E
+/dev/nvme0n1p1      	/boot 	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# UUID=3702bb4c-1539-459b-96e4-d45e64818568 LABEL=home
+/dev/nvme0n1p3      	/home     	ext4      	rw,relatime	0 2
+
+/swapfile none swap defaults,discard  0 0

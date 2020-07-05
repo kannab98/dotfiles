@@ -1,5 +1,6 @@
 #!/bin/sh
-i3lock -i /home/kannab/.dotfiles/wallpaper/neon_resize.png \
+source $HOME/.profile
+i3lock -i $wallpaper \
     --insidecolor=373445ff --ringcolor=ffffffff --line-uses-inside \
     --keyhlcolor=d23c3dff --bshlcolor=d23c3dff --separatorcolor=00000000 \
     --insidevercolor=fecf4dff --insidewrongcolor=d23c3dff \

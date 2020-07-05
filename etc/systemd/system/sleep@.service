@@ -1,0 +1,12 @@
+[Unit]
+Description=Lock the screen
+Before=sleep.target
+ 
+[Service]
+User=%I
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=$i3/lock
+ 
+[Install]
+WantedBy=sleep.target

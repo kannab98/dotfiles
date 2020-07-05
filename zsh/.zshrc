@@ -29,9 +29,11 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.ompinit
 
 alias vim='vim --servername vim'  
+#alias ssh='kitty  +kitten ssh'
 alias ls='ls --color=auto --group-directories-first'
 alias -s tex=vim
 alias -s bib=vim
+
 
 alias -g nf='*(^/om[1])'
 alias -g nd='*(/om[1])'
@@ -49,10 +51,6 @@ zsh-mime-setup
     source "$HOME/.dotfiles/zsh/kill.complete"
 [ -f "$HOME/.dotfiles/zsh/vi-mode" ]           && \
     source "$HOME/.dotfiles/zsh/vi-mode"
-#
-
-
-
 
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

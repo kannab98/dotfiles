@@ -1,13 +1,16 @@
+# Записывает последнюю директрию в файл
 function cd {
         builtin cd $@
         echo $(pwd) > ~/.last_dir
 }
 
 
+# Запуск нового терминала с последней использованной директории
 if [ -f ~/.last_dir ]; then
         cd "`cat ~/.last_dir`"
 fi
 
+# Разархиватор на все случаи жизни
 extract ()
 {
   if [ -f $1 ] ; then
@@ -30,21 +33,7 @@ extract ()
   fi
 }
 
-
-up(){
-  local d=""
-  limit=$1
-  for ((i=1 ; i <= limit ; i++))
-    do
-      d=$d/..
-    done
-  d=$(echo $d | sed 's/^\///')
-  if [ -z "$d" ]; then
-    d=..
-  fi
-  cd $d
-}
-
+# Специализированная для ноутбука функция
 conservation(){
     path=/sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode
     bool=$(cat $path)
@@ -57,31 +46,68 @@ conservation(){
     fi
 }
 
-size-packages(){
+## pacman
+# Список всех специально установленных пакетов, сортированный по размеру
+pkg-size(){
     expac -H M \
         "%011m\t%-20n\t%10d" \
         $(comm -23 <(pacman -Qqen | sort) <(pacman -Qqg base-devel | sort)) | sort -n
 }
-remove-unused-packages(){
-    pacman -Rns $(pacman -Qqdt)
+# Удаление пакетов-сирот с опциональными зависимостями
+pkg-rm-unused(){
+    sudo pacman -Rns $(pacman -Qqdtt)
 }
 
+pkg-dep(){
+    for pkg in "$@"; do
+        echo ":: $pkg dependencies"
+        expac -H M \
+            "%011m\t%-20n\t%10d" \
+            $(expac -l '\n' %E -S $pkg | sort -u)
+        echo "\n"
+    done
+}
+
+
+# Курс валют ЦБ РФ
 rate(){
     if [ ! -f /tmp/ratePage ]; then
-        freshPage='http://www.cbr.ru/scripts/xml_daily.asp?date_req='\
-                                                     $(date +%d.%m.%Y)
-        curl $freshPage > /tmp/ratePage
+        freshPage='http://www.cbr.ru/scripts/xml_daily.asp?date_req='$(date +%d.%m.%Y)
+        curl -sf $freshPage > /tmp/ratePage
     fi
     charcode=($(grep -oP '(?<=CharCode>)[^<]+' /tmp/ratePage))
     value=($(grep -oP '(?<=Value>)[^<]+' /tmp/ratePage))
     
+    if [ $# -ge 2 ]; then
+        mult=$2
+    else
+        mult=1
+    fi
     for ((i=0; i <= ${#value[*]}; i++)); do
         if [ "${charcode[$i]}" = "${1:u}" ]; then
-           echo ${value[$i]}
+           var=$(echo ${value[$i]}  | sed  "s/,/./g")
+           echo "$var*$mult" | bc
         fi
     done
 }
 
+ip-address(){
+    case $1 in
+        local)  echo $(ifconfig | grep -w inet | awk '{ print $2}' | grep 192) ;;
+        public) echo $(curl -4 -sf ifconfig.co);;
+    esac
+}
+
+p(){
+    /usr/bin/python $1 &
+    echo
+}
+
+function pdfs2png(){
+    for pdfile in *.pdf ; do
+      convert    -density 300 "${pdfile}" "${pdfile%.*}".png
+    done
+}
 
 #nfile(){
     #ls -t '*(^/om[1])'    | head -1

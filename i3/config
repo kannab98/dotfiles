@@ -19,10 +19,11 @@ exec setxkbmap -model pc101 -layout us,ru -option grp:alt_shift_toggle
 
 
 
-exec_always --no-startup-id feh  --bg-scale $wallpaper &
+exec        --no-startup-id                 $i3/lock
+exec_always --no-startup-id feh  --bg-center $wallpaper &
 exec_always --no-startup-id                 $compton/compton.sh
-#exec_always --no-startup-id                 $polybar/polybar.sh
-exec_always --no-startup-id                 xfce4-panel --disable-wm-check
+exec_always --no-startup-id                 $polybar/polybar.sh
+#exec_always --no-startup-id                 xfce4-panel --disable-wm-check
 exec_always --no-startup-id                 $i3/wifi
 exec_always --no-startup-id                 $i3/clipboard
 exec_always --no-startup-id                 $i3/power-manager 
@@ -53,6 +54,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec  rofi -show drun -show-icons 
+bindsym $mod+Shift+d exec  rofi-pass
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym Print exec spectacle -b -r -c
 
@@ -79,7 +81,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id $i3/XF86MonBrightness down
 bindsym $mod+n                exec --no-startup-id $i3/new-workspace
 ## Touchpad controls
 ## toggle touchpad
-bindsym XF86TouchpadToggle exec --no-startup-id XF86TouchpadToggle
+bindsym XF86TouchpadToggle exec --no-startup-id $i3/XF86TouchpadToggle
+bindsym $mod+Shift+p       exec --no-startup-id $i3/XF86Display 
 
 # change focus
 bindsym $mod+h focus left
@@ -241,26 +244,16 @@ mode "$mode_system" {
 
 bindsym $mod+o mode "$mode_system"
 
-# Plasma compatibility improvements
+for_window [class=".*"] border pixel 2
+# Xfce4 compatibility improvements
+for_window [class="xfce4-panel"] floating enable,  border none, move right 700px, move down 450px, no_focus
+for_window [class="Xfce4-panel"] floating enable; border pixel 2
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 
-for_window [class=".*"] border none
 
-for_window [class="yakuake"] floating enable
-for_window [class="systemsettings"] floating enable
-for_window [class="plasmashell"] floating enable;
-for_window [title="plasma-desktop"] floating enable; border none
-for_window [title="win7"] floating enable; border none
-for_window [class="krunner"] floating enable; border none
-for_window [class="Kmix"] floating enable; border none
-for_window [class="Klipper"] floating enable; border none
-for_window [class="Plasmoidviewer"] floating enable; border none
-for_window [class="(?i)*nextcloud*"] floating disable
-for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px, no_focus
-for_window [class="Plasma"] floating enable, border none;
-for_window [class="Pavucontrol"] floating enable
-for_window [title="Рабочий стол по умолчанию — Plasma"] kill;
+
+
 
 #assign [class="firefox"] $ws1
 #assign [class="code-oss"] $ws3
@@ -277,25 +270,30 @@ for_window [title="Рабочий стол по умолчанию — Plasma"] 
 
 
 for_window [class="MATLAB"] floating enable 
-for_window [class="xfce4-panel"] floating enable 
-for_window [class="Xfce4-panel"] floating enable 
 for_window [class="nm-connection-editor"] floating enable 
-for_window [class="Nm-connection-editor"] floating enable 
-
 for_window [class="TelegramDesktop"] floating enable,resize set 380 480
 #for_window [class="telegram-desktop"] resize set 380 480
 for_window [title="MATLAB R2019b"] floating disable, border pixel 2
 for_window [class="matplotlib"] floating enable, border pixel 2
+for_window [class="Pavucontrol"] floating enable
 
 for_window [class="feh"] floating enable, resize set 800 600
-gaps inner 5
-gaps outer 5
-gaps bottom 0
-gaps top 0
-smart_gaps on
-smart_gaps inverse_outer
 
+# Pretty features
+#gaps inner 5
+#gaps outer 5
+#gaps bottom 0
+#gaps top 0
+#smart_gaps on
+#smart_gaps inverse_outer
+
+# Activate smart borders (always)
+smart_borders on
+# Activate smart borders (only when there are effectively no gaps)
+#smart_borders no_gaps
+# Hide edge borders only if there is one window with no gaps
 #hide_edge_borders smart_no_gaps
+
 #gaps outer current plus 5
 #gaps horizontal current plus 40
 #gaps outer current toggle 60

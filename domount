@@ -1,0 +1,37 @@
+#!/bin/sh
+
+MYUID=1000              # Ваш uid
+MYGID=1000               # группа users
+MYLOGIN=kannab          # ваш логин
+TERM=kitty              # ваш эмулятор терминала
+MYSHELL=zsh             # ваш шелл
+export DISPLAY=:0       # Ваш X дисплей
+
+
+TMPFILE=/run/media/automount.$RANDOM
+DIR=`cat /etc/fstab | grep -v '#' | grep $* | awk '{print $2;}'`
+if [ "x$DIR" = "x" ]; then
+        MYUUID=`blkid -o value -s UUID $*`
+        if [ "x$MYUUID" = "x" ]; then
+                MYUUID="unknown"
+        fi
+        DIR=/run/media/$MYUUID
+fi
+mkdir -p /run/media
+mkdir -p $DIR
+cat > $TMPFILE << EOF
+#!/bin/sh
+dunstify "$* был примонтирован в $DIR. "
+sudo -S /bin/mount -o iocharset=utf8,uid=$MYUID,gid=$MYGID $* $DIR
+#cd $DIR
+#$MYSHELL
+#sudo /bin/umount -l $DIR
+EOF
+
+chmod a+x $TMPFILE
+
+#su $MYLOGIN -mc "$MYSHELL $TMPFILE"
+$MYSHELL $TMPFILE
+sleep 1
+rm -f $TMPFILE
+#rmdir "$DIR"
