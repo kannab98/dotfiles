@@ -1,14 +1,14 @@
 # Записывает последнюю директрию в файл
-function cd {
-        builtin cd $@
-        echo $(pwd) > ~/.last_dir
-}
+#function cd {
+        #builtin cd $@
+        #echo $(pwd) > ~/.last_dir
+#}
 
 
-# Запуск нового терминала с последней использованной директории
-if [ -f ~/.last_dir ]; then
-        cd "`cat ~/.last_dir`"
-fi
+## Запуск нового терминала с последней использованной директории
+#if [ -f ~/.last_dir ]; then
+        #cd "`cat ~/.last_dir`"
+#fi
 
 # Разархиватор на все случаи жизни
 extract ()

@@ -1,0 +1,24 @@
+#!/bin/bash
+dB=$(iw dev wlan0 link | grep signal | awk '{print $2}')
+dB="${dB:1}"
+
+local_ip=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
+vpn_connection=$(pgrep -a openvpn$ | head -n 1 | awk '{print $NF }' | cut -d '.' -f 1)
+
+
+declare -a icons=("󰤯" "󰤟" "󰤢" "󰤥" "󰤨")
+declare -a icons_vpn=("󰤬" "󰤡" "󰤤" "󰤧" "󰤧")
+declare -a icons_no_connection=("󰤬" "󰤡" "󰤤" "󰤧" "󰤧")
+declare -a intervals=("10" "20" "30" "40" "50" "60") 
+
+for ((i=0; i<${#intervals[*]}-1; i++)); do
+    if [ "$dB" -gt "${intervals[i]}" ] && [ "$dB" -lt "${intervals[i+1]}" ]; then
+        #echo $dB
+        if [ -n "$vpn_connection" ]; then
+            echo ${icons_vpn[i]}
+        else
+            echo ${icons[i]}
+        fi
+
+    fi
+done

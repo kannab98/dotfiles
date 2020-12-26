@@ -1,62 +1,17 @@
 #!/bin/bash
 brightness() {
-
-    if [ "$XDG_CURRENT_DESKTOP" == "KDE" ]; then
-        qdbus org.kde.kglobalaccel /component/org_kde_powerdevil \
-              org.kde.kglobalaccel.Component.invokeShortcut \
-               "$shortcut" "default"
-    else 
-        xbacklight $sign 10
-    fi
-
+    xbacklight $sign 10
 }
 
 
 case "$1" in 
     up)
         sign="-inc"
-        shortcut="Increase Screen Brightness"
         brightness
         ;;
     down)
         sign="-dec"
-        shortcut="Decrease Screen Brightness"
         brightness
         ;;
 esac
 exit 0
-
-
-#brightnessCurrent() {
-
-#qdbus local.org_kde_powerdevil \
-      #/org/kde/Solid/PowerManagement/Actions/BrightnessControl \
-      #brightness 
-
-#}
-#brightness() {
-
-    #if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
-        #brightnessStep=83
-        #qdbus local.org_kde_powerdevil \
-              #/org/kde/Solid/PowerManagement/Actions/BrightnessControl \
-              #setBrightness $(($(brightnessCurrent) $sign $brightnessStep))
-    #else 
-        #xbacklight $sign"inc" 10
-    #fi
-
-#}
-
-
-#case "$1" in 
-    #up)
-        #sign="+"
-        #brightness
-        #;;
-    #down)
-        #sign="-"
-        #brightness
-        #;;
-#esac
-#exit 0
-

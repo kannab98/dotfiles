@@ -1,0 +1,7 @@
+[Unit] 
+Description=CPU powersave 
+[Service] 
+Type=oneshot
+ExecStart=/usr/bin/sh -c "/usr/bin/echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"
+[Install] 
+WantedBy=multi-user.target

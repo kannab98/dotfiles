@@ -1,3 +1,4 @@
+cat << EOF < ./config
 set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -20,12 +21,12 @@ exec setxkbmap -model pc101 -layout us,ru -option grp:alt_shift_toggle
 
 
 exec        --no-startup-id                 $i3/lock
-exec_always --no-startup-id                 feh  --bg-center $wallpaper 
+exec_always --no-startup-id feh  --bg-center $wallpaper &
 exec_always --no-startup-id                 $compton/compton.sh
-exec_always --no-startup-id                 $polybar/polybar.sh
+#exec_always --no-startup-id                 $polybar/polybar.sh
 #exec_always --no-startup-id                 xfce4-panel --disable-wm-check
 exec_always --no-startup-id                 $i3/wifi
-#exec_always --no-startup-id                 $i3/clipboard
+exec_always --no-startup-id                 $i3/clipboard
 exec_always --no-startup-id                 $i3/power-manager 
 #exec_always --no-startup-id                 $i3/pulseaudio
 #exec_always --no-startup-id                 $i3/bluetooth
@@ -33,36 +34,27 @@ exec        --no-startup-id                 dunst
 
 
 
-#exec        --no-startup-id     ~/.dotfiles/kitty/focus-last.sh
-#exec kitty --single-instance &
-#exec                                        rm ~/.dotfiles/kitty/kittytmp
-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 bindsym $mod+w      exec rofi -show window
 # start a terminal
-#bindsym $mod+Return exec urxvt
 bindsym $mod+Return exec kitty
 # start a file manager
 bindsym $mod+e      exec $i3/filemanager
-bindsym $mod+i      exec kitty ipython
 bindsym $mod+m      exec $i3/monitor
-bindsym $mod+u      exec devmon -u
 
 #bindsym $mod+Return exec ~/.dotfiles/kitty/kitty.sh 
 #bindsym $mod+Shift+Return exec kitty -T='main kitty' --detach --listen-on unix:$i3/kittytmp
 # kill focused window
-#bindsym $mod+Shift+q exec xdotool getwindowfocus windowkill
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec  rofi -show drun -show-icons 
 bindsym $mod+Shift+d exec  rofi-pass
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-#bindsym Print exec spectacle -b -r -c
-bindsym Print exec $i3/screenshot
+bindsym Print exec spectacle -b -r -c
 
 # Pulse Audio controls
 #increase sound volume
@@ -281,13 +273,9 @@ for_window [class="TelegramDesktop"] floating enable,resize set 380 480
 #for_window [class="kitty"] resize set 380 480
 for_window [title="MATLAB R2019b"] floating disable, border pixel 2
 for_window [class="matplotlib"] floating enable, border pixel 2
-for_window [class="Matplotlib"] floating enable, border pixel 2
 for_window [class="Pavucontrol"] floating enable
 
 for_window [class="feh"] floating enable, resize set 800 600
-
-for_window [class="xfce4-panel"] border none
-for_window [class="Xfce4-panel"] border none
 
 # Pretty features
 #gaps inner 5
@@ -312,4 +300,16 @@ smart_borders on
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-# vim:filetype=i3config
+bar {
+    font pango:monospace 10
+    colors {
+        background #263238
+        statusline #cfd8dc
+        #separator  #fefefe
+    }
+    i3bar_command  i3bar -t
+    status_command i3blocks
+    #mode hide
+}
+
+EOF
